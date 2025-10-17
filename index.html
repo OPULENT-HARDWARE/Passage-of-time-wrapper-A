@@ -20,42 +20,31 @@
     overflow: hidden;
   }
 
+  /* Main layout */
   .stage {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    width: 100vw;
     background: var(--bg);
   }
 
-  /* Horizontal scrollable wall */
+  /* Horizontal wrapper */
   .wall {
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: var(--gap);
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    padding: var(--gap);
-    width: 100%;
-    height: 100%;
-    box-sizing: border-box;
+    flex-wrap: nowrap;
   }
 
   iframe {
-    flex: 0 0 auto;
     background: #000;
-    width: min(80vw, 700px);
+    width: min(28vw, 400px);
     aspect-ratio: 1 / 1;
     border: none;
     border-radius: 16px;
-    scroll-snap-align: center;
-    transition: transform 0.4s ease;
-  }
-
-  iframe:hover {
-    transform: scale(1.02);
-  }
-
-  iframe {
     opacity: 0;
     animation: fadeIn 1.5s ease forwards;
   }
@@ -68,13 +57,17 @@
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* Hide scrollbars for a cleaner look */
-  .wall::-webkit-scrollbar {
-    display: none;
+  /* Responsive adjustments */
+  @media (max-width: 1000px) {
+    iframe {
+      width: min(40vw, 300px);
+    }
   }
-  .wall {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+
+  @media (max-width: 700px) {
+    .wall {
+      flex-direction: column;
+    }
   }
 </style>
 </head>
