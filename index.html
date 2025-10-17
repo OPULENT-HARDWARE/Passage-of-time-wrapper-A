@@ -20,50 +20,46 @@
     overflow: hidden;
   }
 
-  /* Main centering container */
   .stage {
-    display: grid;
-    place-items: center;
-    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     background: var(--bg);
   }
 
-  /* Responsive layout for iframes */
+  /* Horizontal scrollable wall */
   .wall {
-    display: grid;
+    display: flex;
     gap: var(--gap);
-    justify-items: center;
-    align-items: center;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: var(--gap);
     width: 100%;
-    max-width: 1600px;
-    background: var(--bg);
+    height: 100%;
+    box-sizing: border-box;
   }
 
   iframe {
+    flex: 0 0 auto;
     background: #000;
-    width: min(90vw, 90dvh, 800px);
+    width: min(80vw, 700px);
     aspect-ratio: 1 / 1;
     border: none;
     border-radius: 16px;
-    display: block;
-    overflow: hidden;
+    scroll-snap-align: center;
+    transition: transform 0.4s ease;
   }
 
-  /* Landscape mode — 2-up grid */
-  @media (min-aspect-ratio: 4/3) and (min-width: 900px) {
-    .wall {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    iframe {
-      width: min(45vw, 85dvh, 700px);
-    }
+  iframe:hover {
+    transform: scale(1.02);
   }
 
-  /* Fade-in effect */
   iframe {
     opacity: 0;
     animation: fadeIn 1.5s ease forwards;
   }
+
   iframe:nth-child(2) { animation-delay: 0.3s; }
   iframe:nth-child(3) { animation-delay: 0.6s; }
 
@@ -71,35 +67,26 @@
     from { opacity: 0; transform: scale(0.96); }
     to { opacity: 1; transform: scale(1); }
   }
+
+  /* Hide scrollbars for a cleaner look */
+  .wall::-webkit-scrollbar {
+    display: none;
+  }
+  .wall {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 </style>
 </head>
 <body>
   <div class="stage">
     <div class="wall">
 
-      <!-- Calendar Ring -->
-      <iframe
-        src="https://opulent-hardware.github.io/Calendar-A/"
-        title="Calendar Ring"
-        loading="lazy"
-        scrolling="no"
-      ></iframe>
+      <iframe src="https://opulent-hardware.github.io/Calendar-A/" title="Calendar Ring" loading="lazy" scrolling="no"></iframe>
 
-      <!-- Chronograph -->
-      <iframe
-        src="https://opulent-hardware.github.io/Chronograph-A-iframe/"
-        title="Chronograph"
-        loading="lazy"
-        scrolling="no"
-      ></iframe>
+      <iframe src="https://opulent-hardware.github.io/Chronograph-A-iframe/" title="Chronograph" loading="lazy" scrolling="no"></iframe>
 
-      <!-- Breath and Beats -->
-      <iframe
-        src="https://opulent-hardware.github.io/Breath-and-Beats/"
-        title="Breath and Beats"
-        loading="lazy"
-        scrolling="no"
-      ></iframe>
+      <iframe src="https://opulent-hardware.github.io/Breath-and-Beats/" title="Breath and Beats" loading="lazy" scrolling="no"></iframe>
 
     </div>
   </div>
